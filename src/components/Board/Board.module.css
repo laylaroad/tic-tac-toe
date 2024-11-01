@@ -1,0 +1,64 @@
+.board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .status {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+  }
+  
+  .boardGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 5px;
+  }
+  
+  .choiceScreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    text-align: center;
+}
+
+.choiceScreen h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.choiceScreen button {
+    padding: 12px 24px;
+    margin: 10px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.choiceScreen button:first-child {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.choiceScreen button:last-child {
+    background-color: #2196F3;
+    color: #fff;
+}
+
+.choiceScreen button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.choiceScreen button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
