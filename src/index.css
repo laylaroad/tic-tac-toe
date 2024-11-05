@@ -2,9 +2,23 @@
 
 body {
   margin: 0;
-  font-family: 'Inter', -apple-system,  sans-serif;
+  font-family: 'Inter', -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative; 
+  overflow: hidden; 
+}
+
+
+body::before {
+  content: "";
+  position: fixed; 
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-image: url('./assets/images/background.webp');
   background-repeat: repeat;
+  filter: blur(2px); 
+  z-index: -1; 
 }

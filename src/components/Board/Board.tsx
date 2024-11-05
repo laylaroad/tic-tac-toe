@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Cell from '../Cell/Cell'
 import ResetButton from '../ResetButton/ResetButton';
 import styles from './Board.module.css';
-
+import Button from '@mui/material/Button';
 
 type CellValue = 'X' | 'O' | null;
 
@@ -128,9 +128,22 @@ const Board: React.FC = () => {
             {!gameStarted ? (
                 <div className={styles.choiceScreen}>
                     <h1>Hey! This is Tic-Tac Toe</h1>
-                    <h2>What will you play for?</h2>
-                    <button onClick={() => handlePlayerChoice(true)}>I choose "X"</button>
-                    <button onClick={() => handlePlayerChoice(false)}>I choose "O"</button>
+                    <span>What will you play for?</span>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => handlePlayerChoice(true)}
+
+                    >
+                        I choose "X"
+                    </Button>
+                    <Button
+                        variant="outlined"
+                        color="secondary"
+                        onClick={() => handlePlayerChoice(false)}
+                    >
+                        I choose "O"
+                    </Button>
                 </div>
             ) : (
                 <>
