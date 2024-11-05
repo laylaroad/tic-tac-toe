@@ -5,6 +5,8 @@ Hi there! I've made a simple Tic-Tac-Toe game with React and Material UI.
 How to play? 
 Players can choose to play as either 'X' or 'O', and the game supports both single-player (against a basic AI) and two-player modes.
 
+[Demo](https://tic-tac-toe-beryl-chi-11.vercel.app/)
+
 ## Features
 
 - User can choose to play as 'X' or 'O' and play with a computer.
@@ -18,9 +20,9 @@ Players can choose to play as either 'X' or 'O', and the game supports both sing
 - Material UI
 - TypeScript
 
-## How to run the project
 
-To run this project locally, follow these steps:
+
+## How to run the project
 
 1. **Clone the repository:**
    ```bash
@@ -33,7 +35,10 @@ To run this project locally, follow these steps:
 3. **Install dependencies:**
  ```bash
  npm install
- 
- 4. ```bash
-  npm start
+  ```
+4. **Start**:
+ ```bash
+npm start
+  ```
 
+ 
