@@ -22,6 +22,9 @@ const Board: React.FC = () => {
     const [isXNext, setIsXNext] = useState<boolean>(true);
     const [gameStarted, setGameStarted] = useState(false);
     const [userIsX, setUserIsX] = useState<boolean | null>(null);
+    const [winningCombination, setWinningCombination] = useState<number[] | null>(null);
+    const [winner, setWinner] = useState<CellValue | null>(null);
+
     const computerSymbol = userIsX === true ? 'O' : 'X';
     const userSymbol = userIsX === true ? 'X' : 'O';
 
@@ -42,7 +45,7 @@ const Board: React.FC = () => {
     };
 
     const handleClick = (index: number) => {
-        if (!cells[index] && !checkWinner(cells) && gameStarted && (isXNext === (userSymbol === 'X'))) {
+        if (!cells[index] && !winner && gameStarted && (isXNext === (userSymbol === 'X'))) {
             const newCells = [...cells];
             newCells[index] = userSymbol;
             setCells(newCells);
@@ -79,7 +82,6 @@ const Board: React.FC = () => {
             .filter(index => index !== null) as number[];
         return availableCells.length > 0 ? availableCells[Math.floor(Math.random() * availableCells.length)] : null;
     };
-
     const computerMove = () => {
         const bestMove = findBestMove();
         if (bestMove !== null) {
@@ -91,30 +93,44 @@ const Board: React.FC = () => {
     };
 
     useEffect(() => {
-        if (gameStarted && (isXNext !== (userSymbol === 'X')) && !checkWinner(cells)) {
+        const result = checkWinner(cells);
+        if (result) {
+            setWinner(result);
+            const winningCombo = winningCombinations.find(([a, b, c]) =>
+                cells[a] === result && cells[b] === result && cells[c] === result
+            );
+            if (winningCombo) setWinningCombination(winningCombo);
+        }
+    }, [cells]);
+
+    useEffect(() => {
+        if (gameStarted && !winner && (isXNext !== (userSymbol === 'X'))) {
             computerMove();
         }
-    }, [isXNext, gameStarted, cells]);
+    }, [isXNext, gameStarted, cells, winner]);
 
-    const winner = checkWinner(cells);
     const status = winner
-        ? `Победитель: ${winner}`
-        : `Следующий ход: ${isXNext ? 'X' : 'O'}`;
+        ? `The winner is: ${winner}`
+        : `Next move: ${isXNext ? 'X' : 'O'}`;
 
     const resetGame = () => {
         setCells(Array(9).fill(null));
         setIsXNext(true);
         setGameStarted(false);
         setUserIsX(null);
+        setWinner(null);
+        setWinningCombination(null);
     };
+
 
     return (
         <div className={styles.board}>
             {!gameStarted ? (
                 <div className={styles.choiceScreen}>
-                    <h2>Выберите, кто будет играть за "X"</h2>
-                    <button onClick={() => handlePlayerChoice(true)}>Я играю за "X"</button>
-                    <button onClick={() => handlePlayerChoice(false)}>Я играю за "O"</button>
+                    <h1>Hey! This is Tic-Tac Toe</h1>
+                    <h2>What will you play for?</h2>
+                    <button onClick={() => handlePlayerChoice(true)}>I choose "X"</button>
+                    <button onClick={() => handlePlayerChoice(false)}>I choose "O"</button>
                 </div>
             ) : (
                 <>

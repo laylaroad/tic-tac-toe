@@ -8,7 +8,7 @@ interface ResetButtonProps {
 const ResetButton: React.FC<ResetButtonProps> = ({ onClick }) => {
     return (
         <button className={styles.resetButton} onClick={onClick}>
-            Сбросить игру
+            Restart
         </button>
     );
 };
