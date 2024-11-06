@@ -5,7 +5,7 @@ Hi there! I've made a simple Tic-Tac-Toe game with React and Material UI.
 How to play? 
 Players can choose to play as either 'X' or 'O', and the game supports both single-player (against a basic AI) and two-player modes.
 
-[Demo](https://tic-tac-toe-beryl-chi-11.vercel.app/)
+[Demo](https://tic-tac-toe-git-develop-laylaroads-projects.vercel.app/)
 
 ## Features
 
