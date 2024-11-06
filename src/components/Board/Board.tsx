@@ -40,7 +40,7 @@ const Board: React.FC = () => {
 
     const handlePlayerChoice = (isX: boolean) => {
         setUserIsX(isX);
-        setIsXNext(isX);
+        setIsXNext(true);
         setGameStarted(true);
     };
 
@@ -53,7 +53,6 @@ const Board: React.FC = () => {
         }
     };
 
-    // функция для нахождения лучшего хода
     const findBestMove = (): number | null => {
         for (const combo of winningCombinations) {
             const [a, b, c] = combo;
@@ -82,6 +81,7 @@ const Board: React.FC = () => {
             .filter(index => index !== null) as number[];
         return availableCells.length > 0 ? availableCells[Math.floor(Math.random() * availableCells.length)] : null;
     };
+
     const computerMove = () => {
         const bestMove = findBestMove();
         if (bestMove !== null) {
@@ -104,14 +104,30 @@ const Board: React.FC = () => {
     }, [cells]);
 
     useEffect(() => {
+        let timer: NodeJS.Timeout;
         if (gameStarted && !winner && (isXNext !== (userSymbol === 'X'))) {
-            computerMove();
+            timer = setTimeout(() => {
+                computerMove();
+            }, 700);
         }
-    }, [isXNext, gameStarted, cells, winner]);
+
+        return () => clearTimeout(timer);
+    }, [isXNext, gameStarted, cells, winner, userSymbol]);
 
     const status = winner
         ? `The winner is: ${winner}`
         : `Next move: ${isXNext ? 'X' : 'O'}`;
+
+    useEffect(() => {
+        let timer: NodeJS.Timeout;
+        if (gameStarted && !winner && (isXNext !== (userSymbol === 'X'))) {
+            timer = setTimeout(() => {
+                computerMove();
+            }, 5000);
+        }
+
+        return () => clearTimeout(timer);
+    }, [isXNext, gameStarted, cells, winner, userSymbol]);
 
     const resetGame = () => {
         setCells(Array(9).fill(null));
@@ -122,28 +138,28 @@ const Board: React.FC = () => {
         setWinningCombination(null);
     };
 
-
     return (
         <div className={styles.board}>
             {!gameStarted ? (
                 <div className={styles.choiceScreen}>
                     <h1>Hey! This is Tic-Tac Toe</h1>
-                    <span>What will you play for?</span>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => handlePlayerChoice(true)}
-
-                    >
-                        I choose "X"
-                    </Button>
-                    <Button
-                        variant="outlined"
-                        color="secondary"
-                        onClick={() => handlePlayerChoice(false)}
-                    >
-                        I choose "O"
-                    </Button>
+                    <span>Choose your side</span>
+                    <div className={styles.buttons}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => handlePlayerChoice(true)}
+                        >
+                            X
+                        </Button>
+                        <Button
+                            variant="outlined"
+                            color="secondary"
+                            onClick={() => handlePlayerChoice(false)}
+                        >
+                            O
+                        </Button>
+                    </div>
                 </div>
             ) : (
                 <>
