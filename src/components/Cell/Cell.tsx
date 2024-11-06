@@ -1,16 +1,25 @@
 import React from 'react';
-import styles from './Cell.module.css';
 
 interface CellProps {
     value: 'X' | 'O' | null;
     onClick: () => void;
+    isWinningCell?: boolean;
+    className?: string;
 }
 
-const Cell: React.FC<CellProps> = ({ value, onClick }) => {
+const Cell: React.FC<CellProps> = ({
+    value,
+    onClick,
+    isWinningCell = false,
+    className = ''
+}) => {
     return (
-        <button className={styles.cell} onClick={onClick}>
+        <div
+            className={`${className} ${isWinningCell ? 'winningCell' : ''}`}
+            onClick={onClick}
+        >
             {value}
-        </button>
+        </div>
     );
 };
 

@@ -3,43 +3,59 @@
     flex-direction: column;
     align-items: center;
     margin: 200px auto;
-  }
+}
 
-  h1 {
-      font-size: 72px;
-  }
+h1 {
+    font-size: 72px;
+}
 
-  span {
-      font-size: 48px;
-      margin-bottom: 50px;
-  }
-  
-  .status {
+span {
+    font-size: 48px;
+    margin-bottom: 50px;
+}
+
+.status {
     margin-bottom: 20px;
     font-size: 1.5rem;
-  }
-  
-  .boardGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 100px);
-    gap: 5px;
-  }
+}
 
-  
-  .choiceScreen {
+.boardGrid {
+    display: grid;
+    grid-template-columns: repeat(3, auto); 
+    gap: 5px;
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    width: 150px;
+    height: 150px;
+    background-color: #f5f5f5;
+    border: 2px solid #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cell:hover {
+    background-color: #e0e0e0;
+}
+
+.winningCell {
+    background-color: rgba(255, 223, 186, 0.6); 
+    text-decoration: line-through;
+    color: red;
+    font-weight: bold;
+}
+
+.choiceScreen {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     color: #333;
     text-align: center;
-}
-
-.choiceScreen h2 {
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #333;
 }
 
 .buttons {
