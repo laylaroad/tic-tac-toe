@@ -24,18 +24,31 @@ const Board: React.FC = () => {
     const [userIsX, setUserIsX] = useState<boolean | null>(null);
     const [winningCombination, setWinningCombination] = useState<number[] | null>(null);
     const [winner, setWinner] = useState<CellValue | null>(null);
+    const [isDraw, setIsDraw] = useState<boolean>(false);
 
     const computerSymbol = userIsX === true ? 'O' : 'X';
     const userSymbol = userIsX === true ? 'X' : 'O';
 
-    const checkWinner = (squares: CellValue[]): CellValue | null => {
-        for (let i = 0; i < winningCombinations.length; i++) {
-            const [a, b, c] = winningCombinations[i];
-            if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-                return squares[a];
+
+    const checkWinner = (board: CellValue[]) => {
+        const lines = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            [0, 4, 8], [2, 4, 6]
+        ];
+
+        for (let i = 0; i < lines.length; i++) {
+            const [a, b, c] = lines[i];
+            if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                return board[a];
             }
         }
         return null;
+    };
+
+
+    const checkDraw = (board: CellValue[]) => {
+        return board.every(cell => cell !== null);
     };
 
     const handlePlayerChoice = (isX: boolean) => {
@@ -100,6 +113,8 @@ const Board: React.FC = () => {
                 cells[a] === result && cells[b] === result && cells[c] === result
             );
             if (winningCombo) setWinningCombination(winningCombo);
+        } else if (checkDraw(cells)) {
+            setIsDraw(true);
         }
     }, [cells]);
 
@@ -116,18 +131,9 @@ const Board: React.FC = () => {
 
     const status = winner
         ? `The winner is: ${winner}`
-        : `Next move: ${isXNext ? 'X' : 'O'}`;
-
-    useEffect(() => {
-        let timer: NodeJS.Timeout;
-        if (gameStarted && !winner && (isXNext !== (userSymbol === 'X'))) {
-            timer = setTimeout(() => {
-                computerMove();
-            }, 5000);
-        }
-
-        return () => clearTimeout(timer);
-    }, [isXNext, gameStarted, cells, winner, userSymbol]);
+        : isDraw
+            ? `No winner. It's a draw!`
+            : `Next move: ${isXNext ? 'X' : 'O'}`;
 
     const resetGame = () => {
         setCells(Array(9).fill(null));
@@ -136,6 +142,7 @@ const Board: React.FC = () => {
         setUserIsX(null);
         setWinner(null);
         setWinningCombination(null);
+        setIsDraw(false);
     };
 
     return (

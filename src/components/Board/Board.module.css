@@ -24,7 +24,6 @@ span {
     grid-template-columns: repeat(3, auto); 
     gap: 5px;
 }
-
 .cell {
     display: flex;
     align-items: center;
@@ -36,6 +35,7 @@ span {
     border: 2px solid #333;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    position: relative; 
 }
 
 .cell:hover {
@@ -43,10 +43,20 @@ span {
 }
 
 .winningCell {
-    background-color: rgba(255, 223, 186, 0.6); 
-    text-decoration: line-through;
-    color: red;
+    background-color: rgba(255, 243, 230, 0.788);
+    color: rgb(185, 21, 21); 
     font-weight: bold;
+}
+
+.winningCell::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px; 
+    background-color: rgb(185, 21, 21); 
+    transform: translateY(-50%) rotate(135deg);
 }
 
 .choiceScreen {
@@ -94,4 +104,74 @@ span {
 .choiceScreen button:active {
     transform: translateY(-3px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .board {
+        margin: 100px auto;
+    }
+
+    h1 {
+        font-size: 48px;
+    }
+
+    span {
+        font-size: 36px;
+        margin-bottom: 30px;
+    }
+
+    .status {
+        font-size: 1.2rem;
+    }
+
+    .boardGrid {
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 10px;
+    }
+
+    .cell {
+        font-size: 2rem;
+        width: 120px;
+        height: 120px; 
+    }
+
+    .choiceScreen button {
+        font-size: 1.5rem;
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 320px) {
+    .board {
+        margin: 50px auto;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    span {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .status {
+        font-size: 1rem;
+    }
+
+    .boardGrid {
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 8px;
+    }
+
+    .cell {
+        font-size: 1.5rem; 
+        width: 90px; 
+        height: 90px; 
+    }
+
+    .choiceScreen button {
+        font-size: 1.2rem; 
+        padding: 8px 16px;
+    }
 }
