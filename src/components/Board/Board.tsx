@@ -149,7 +149,7 @@ const Board: React.FC = () => {
         <div className={styles.board}>
             {!gameStarted ? (
                 <div className={styles.choiceScreen}>
-                    <h1>Hey! This is Tic-Tac Toe</h1>
+                    <h1>Hey! This is Tic-Tac-Toe</h1>
                     <span>Choose your side</span>
                     <div className={styles.buttons}>
                         <Button variant="contained" color="primary" onClick={() => handlePlayerChoice(true)}>
