@@ -10,9 +10,8 @@ Players can choose to play as either 'X' or 'O', and the game supports both sing
 ## Features
 
 - User can choose to play as 'X' or 'O' and play with a computer.
-- Responsive design for various screen sizes.
 - Clear indication of the winner after the game ends.
-- Restart functionality to reset the game state.
+- The game automatically detects when there’s a draw.
 
 ## Technologies
 
@@ -27,6 +26,7 @@ Players can choose to play as either 'X' or 'O', and the game supports both sing
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/yourusername/tic-tac-toe.git
+   
 
 2. **Navigate to the project directory:**
    ```bash
